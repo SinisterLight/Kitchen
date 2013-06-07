@@ -1,0 +1,17 @@
+{
+  "name": "base",
+  "description": "base box configuration",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "project_environment": "staging"
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[chef-client]",
+    "recipe[htop]"
+  ],
+  "env_run_lists": {
+  }
+}
