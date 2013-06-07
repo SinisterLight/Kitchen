@@ -9,7 +9,6 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[chef-client]",
     "recipe[htop]"
   ],
   "env_run_lists": {
