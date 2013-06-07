@@ -27,3 +27,8 @@ task :bundle_cookbook, :cookbook do |t, args|
 
   FileUtils.rm_rf temp_dir
 end
+
+desc "Runs foodcritic against all the cookbooks."
+task :foodcritic do
+  sh "bundle exec foodcritic -f any cookbooks"
+end

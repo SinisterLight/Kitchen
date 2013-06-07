@@ -1,0 +1,3 @@
+[submodule "cookbooks/node-cooker"]
+	path = cookbooks/node-cooker
+	url = git@github.com:SinisterLight/node-cooker.git
