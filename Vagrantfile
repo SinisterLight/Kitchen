@@ -4,7 +4,7 @@
 Vagrant::Config.run do |config|
   config.vm.box = "centos"
 
-  # config.vm.box_url = "http://domain.com/path/to/above.box"
+  config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
