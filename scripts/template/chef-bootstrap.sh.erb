@@ -1,0 +1,65 @@
+#!/bin/sh
+
+function debug(){
+  echo "**************************************"
+  echo "*** $@ ***"
+  echo "**************************************"
+}
+
+debug "Upgrading and updating the server"
+yum -y upgrade
+yum -y update
+yum install -y htpdate
+
+debug "Setting timezone to IST"
+rm -f /etc/localtime 
+ln -s /usr/share/zoneinfo/Asia/Calcutta /etc/localtime
+
+debug "Synchronizing time IST"
+htpdate -s www.google.co.in
+
+debug "Cleaning up YUM caches"
+yum clean all
+
+debug "Install vim :\)"
+yum -y install vim-enhanced
+
+debug "Installing miscellaneous stuff"
+yum install -y curl wget
+
+debug "Disabling iptables"
+service iptables stop
+
+debug "Installing chef server"
+rpm -Uvh http://rbel.co/rbel6
+yum install -y rubygem-chef
+
+debug "updating yum"
+yum -y update  
+
+debug "setting up chef"
+
+(
+cat <<'EOP'
+<%= validation_key %>
+EOP
+) > /tmp/validation.pem
+awk NF /tmp/validation.pem > /etc/chef/validation.pem
+rm /tmp/validation.pem
+
+(
+cat <<'EOP'
+<%= config_content %>
+EOP
+) > /etc/chef/client.rb
+
+(
+cat <<'EOP'
+<%= { "run_list" => @run_list }.to_json %>
+EOP
+) > /etc/chef/first-boot.json
+
+echo "Starting chef run..."
+
+<%= start_chef %>
+debug "Now reboot your box"
