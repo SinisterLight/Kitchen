@@ -1,0 +1,16 @@
+{
+  "name": "node",
+  "description": "installing node",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "project_environment": "staging"
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[node]"
+  ],
+  "env_run_lists": {
+  }
+}
